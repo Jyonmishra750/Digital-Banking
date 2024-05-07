@@ -42,8 +42,8 @@ The software provides Separate security levels for the staff and the administrat
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your/repository.git
-   cd repository
+   git clone https://github.com/Jyonmishra750/Digital-Banking.git
+   cd Digital-Banking
 2. Frontend setup (Angular)
 
    ```sh
