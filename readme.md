@@ -2,9 +2,9 @@
 
 Secure Banking application with Spring Boot and Angular.
 
-This application provides a powerful tool for bank operations such as holding up accounting information in the database and also able to keep daily banking transactions. This application also helps in adding details of new customers such as account no; It also has features for deletion and modification of existing customers, and also provides fast data searching and calculating data with less time. This software helps in reducing the clerical work of the staff since almost all of the work can be done by the software.
+This application provides a powerful tool for bank operations such as holding up accounting information in the database and also able to keep daily banking transactions. This application also helps add details of new customers such as account no; It also has features for deletion and modification of existing customers and provides fast data searching and calculating data with less time. This software helps reduce the clerical work of the staff since almost all of the work can be done by the software.
 
-The software provides Separate security levels for the staff and the administrator. This software holds a well-defined RDBMS database for storing data in the bank, which can handle large amounts of data and frequently use it. The system can connect with the printers and scanners, which helps the user get full advantage of the software, such as giving up an annual report or another report in a printable format.
+The software provides Separate security levels for the staff and the administrator. This software holds a well-defined RDBMS database for storing data in the bank, which can handle and frequently use large amounts of data. The system can connect with the printers and scanners, which helps the user get full advantage of the software, such as giving up an annual report or another report in a printable format.
 
 ## Technology Used
 - JDK 17
@@ -15,10 +15,11 @@ The software provides Separate security levels for the staff and the administrat
 ## Features
 
 - **User Authentication**: Users can sign up and log in to their accounts securely.
+- **OTP Send and Validation**: Users will receive an OTP while registering and validate that OTP for successful registration.
 - **Account Management**: Users can view their account details, including balance and transaction history.
 - **Fund Transfers**: Users can transfer funds between their accounts or to other users.
 - **Transaction History**: Users can view their transaction history and filter transactions by date or type.
-- **Mail Notifications**: Users receive email notifications for important account activities, such as fund transfers and account updates.
+- **Mail Notifications**: Users receive email notifications for important account activities, such as fund transfers and updates.
 
 ## Technologies Used
 
@@ -41,8 +42,8 @@ The software provides Separate security levels for the staff and the administrat
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your/repository.git
-   cd repository
+   git clone https://github.com/Jyonmishra750/Digital-Banking.git
+   cd Digital-Banking
 2. Frontend setup (Angular)
 
    ```sh
