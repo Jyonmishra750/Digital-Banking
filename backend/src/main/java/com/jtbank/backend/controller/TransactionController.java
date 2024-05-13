@@ -3,11 +3,14 @@ package com.jtbank.backend.controller;
 import com.jtbank.backend.constant.TransactionMode;
 import com.jtbank.backend.dto.DatatableDTO;
 import com.jtbank.backend.mapper.TransactionMapper;
+import com.jtbank.backend.model.Transaction;
+import com.jtbank.backend.service.IGenerateStatementService;
 import com.jtbank.backend.service.ITransactionService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController

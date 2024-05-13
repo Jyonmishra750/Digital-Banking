@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ToastComponent } from '../toast/toast.component';
 import { ModalComponent } from '../modal/modal.component';
 import { CurrencyPipe } from '@angular/common';
-import { Observable } from 'rxjs';
 import { Account } from '../model/account';
 import { AccountService, BASE_URL } from '../services/account.service';
 
@@ -19,10 +18,12 @@ const DEFAULT_PROFILE = "../../assets/avatardefault_92824.png";
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
+
   profilePicture = DEFAULT_PROFILE;
   base_url = BASE_URL;
   accountService = inject(AccountService);
   modalVisible = false;
+  modalVisible1 = false;
   toastHeading = ""; toastDescription = ""; toastVisible = false;
   account!: Account;  file!: File;
 
@@ -90,6 +91,29 @@ export class ProfileComponent implements OnInit {
 
   onUpload(event: any) {
     this.file = event.target.files.item(0);
+  }
+
+  onGenerate(form: NgForm) {
+   if(form.valid){
+      const startDate = form.value.fromDate;
+      const endDate = form.value.toDate;
+      this.accountService.generateStatement(startDate, endDate).subscribe({
+        next: () => {
+          this.generateToast("Success", "Your Account Statement has been downloaded.")
+          form.reset;
+        },
+        error: err => {
+          console.log(err);
+          const error = err.error;
+          this.generateToast(error['title'], error['detail'])
+        },
+        complete: () => {
+          form.reset();
+          setTimeout(() => 2000);
+          this.modalVisible1 = false;
+        }
+      })
+   }
   }
 
   generateToast(heading: string, description: string) {

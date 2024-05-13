@@ -11,6 +11,7 @@ export const BASE_URL = environment.base_url + '/accounts';
   providedIn: 'root'
 })
 export class AccountService {
+  
   http = inject(HttpClient);
   noauth = { headers: { "noauth": "noauth" } };
 
@@ -58,5 +59,9 @@ export class AccountService {
     const formData = new FormData();
     formData.append("file", file);
     return this.http.post<Account>(BASE_URL + "/image", formData);
+  }
+
+  generateStatement(startDate: string, endDate: string) {
+    return this.http.post(BASE_URL + "/generateStatement/" + startDate + "/date/" + endDate, {});
   }
 }

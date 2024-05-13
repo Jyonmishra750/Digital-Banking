@@ -7,22 +7,27 @@ import com.jtbank.backend.repository.AccountRepository;
 import com.jtbank.backend.repository.TransactionRepository;
 import com.jtbank.backend.service.ITransactionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TransactionImpl implements ITransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
+    private static final String FILE = "C:\\Users\\HP\\Downloads\\MyBankStatement.pdf";
 
     @Async
     @Transactional
@@ -36,6 +41,12 @@ public class TransactionImpl implements ITransactionService {
             transactions = new ArrayList<>();
         }
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String created = LocalDate.now().format(formatter);
+        String modified = LocalDate.now().format(formatter);
+
+        transaction.setCreatedDate(LocalDate.parse(created, formatter));
+        transaction.setModifiedDate(LocalDate.parse(modified, formatter));
         transaction.setTimestamp(LocalDateTime.now());
         transactions.add(transaction);
 

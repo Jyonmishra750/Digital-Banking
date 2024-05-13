@@ -17,8 +17,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: [your-email]
-    password: [your-email-password]
+    username: digitalbanking.mcaproject@gmail.com
+    password: hkrkjsbznxfsscli
     properties:
       mail:
         smtp:

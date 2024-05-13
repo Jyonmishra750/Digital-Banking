@@ -1,5 +1,6 @@
 package com.jtbank.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jtbank.backend.constant.AccountStatus;
 import com.jtbank.backend.constant.AccountType;
 import com.jtbank.backend.model.helper.Auditing;
@@ -38,6 +39,7 @@ public class Account extends Auditing {
     @JoinColumn(name = "address_id")
     private Address address;
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Transaction> transactions;
     @Column(name = "Otp")
     private String otp;

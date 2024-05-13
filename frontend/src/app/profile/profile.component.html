@@ -15,6 +15,9 @@
                 <p><i class="fa fa-wallet"></i> {{ account.accountBalance| currency : "INR" }}</p>
                 <p><i class="fa fa-phone"></i> {{account.contactNumber}}</p>
                 <p><i class="fa fa-envelope"></i> {{account.accountEmail}}</p>
+                <div class="downloadButton-group">
+                    <button type="button" (click)="modalVisible1 = !modalVisible1">Download Account Statement</button>
+                </div>
             </div>
             <div>
                 <h2>About</h2>
@@ -88,7 +91,21 @@
         </div>
     </form>
 </app-modal>
-} @if (toastVisible) {
+} 
+@if (modalVisible1) {
+    <app-modal [header]="'Download Account Statement'">
+        <form method="post" #generateForm="ngForm" (ngSubmit)="onGenerate(generateForm)">
+            <label for="fromDate">From: </label><input type="date" placeholder="From Date" class="w-100" name="fromDate" required ngModel /><br>
+            <label for="toDate">To: </label><input type="date" placeholder="To Date" class="w-100" name="toDate" required ngModel /><br>
+            <div class="button-group">
+                <button type="submit">Download</button>
+                <button type="button" (click)="modalVisible1 = !modalVisible1">Cancel</button>
+            </div>
+        </form>
+    </app-modal>
+    }
+
+@if (toastVisible) {
 <app-toast [heading]="toastHeading" [description]="toastDescription">
 </app-toast>
 }

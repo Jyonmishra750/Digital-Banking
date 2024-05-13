@@ -152,7 +152,6 @@ public class AccountServiceImpl implements IAccountService {
         var account = getAccount(receiver);
         var name = account.getAccountHolderName();
         var email = account.getCredential().getAccountEmail();
-        //var accountNumber = account.getAccountNumber();
         accountRepository.addBalance(receiver, balance);
         var transactionReceiver = new Transaction();
         transactionReceiver.setMode(TransactionMode.CREDIT);
@@ -166,6 +165,7 @@ public class AccountServiceImpl implements IAccountService {
         var transaction = new Transaction();
         transaction.setMode(TransactionMode.TRANSFER);
         transaction.setAmount(balance);
+        transaction.setReceiverAccountNumber(receiver);
 
         transactionService.addTransaction(transaction, sender);
     }

@@ -5,8 +5,10 @@ import com.jtbank.backend.dto.*;
 import com.jtbank.backend.mapper.AccountMapper;
 import com.jtbank.backend.model.Account;
 import com.jtbank.backend.model.Credential;
+import com.jtbank.backend.model.Transaction;
 import com.jtbank.backend.repository.AccountRepository;
 import com.jtbank.backend.service.IAccountService;
+import com.jtbank.backend.service.IGenerateStatementService;
 import com.jtbank.backend.service.IJWTService;
 import com.jtbank.backend.service.IMailService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -33,6 +35,7 @@ public class AccountController {
     private final IAccountService accountService;
     private final IJWTService jwtService;
     private final IMailService mailService;
+    private final IGenerateStatementService statementService;
     private final AuthenticationManager authenticationManager;
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
@@ -122,12 +125,17 @@ public class AccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createAccount(@RequestAttribute long accountNumber) throws UnsupportedEncodingException, MessagingException {
         var accountDetails = accountService.getAccount(accountNumber);
-        //var loan = AccountMapper.modelMapper(dto);
-        //var result = loanService.loanApplicationForm(loan);
         var name = accountDetails.getAccountHolderName();
         var email = accountDetails.getCredential().getAccountEmail();
         mailService.sendLoanSuccessfulMessage(name, email);
-        //return AccountMapper.dtoMapper(result);
+    }
+
+    @PostMapping("/generateStatement/{startDate}/date/{endDate}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Transaction> generateBankStatement(@RequestAttribute long accountNumber,
+                                                   @PathVariable String startDate,
+                                                   @PathVariable String endDate){
+        return statementService.generateStatements(accountNumber, startDate, endDate);
     }
 
     @PutMapping("/{accountNumber}")

@@ -140,6 +140,29 @@ label {
     box-shadow: 5px 5px 5px var(--primary-shadow);
 }
 
+.downloadButton-group {
+    padding-block: 1rem;
+    text-align: center;
+}
+
+.downloadButton-group button:hover {
+    transform: scale(1.05);
+  }
+
+.downloadButton-group button {
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    padding: 0.5rem;
+    background-color: green;
+    color: var(--primary-white);
+    cursor: pointer;
+    font-size:medium;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 5px var(--primary-shadow);
+}
+
 app-modal input {
     display: block;
     outline: none;
