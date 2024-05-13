@@ -20,6 +20,7 @@ The software provides Separate security levels for the staff and the administrat
 - **Fund Transfers**: Users can transfer funds between their accounts or to other users.
 - **Transaction History**: Users can view their transaction history and filter transactions by date or type.
 - **Mail Notifications**: Users receive email notifications for important account activities, such as fund transfers and updates.
+- **Download Account Statement in PDF Format**: Users can download their account statements between a valid date range in PDF Format.
 
 ## Technologies Used
 
@@ -27,6 +28,8 @@ The software provides Separate security levels for the staff and the administrat
 - **Backend**: Spring Boot, Java
 - **Database**: MySQL
 - **Security**: Spring Security, JWT Authentication
+- **Java MailSender**: Mail Sending Service
+- **ITextPdf**: PDF Download
 - **API Documentation**: Swagger
 
 ## Setup
@@ -65,7 +68,7 @@ The software provides Separate security levels for the staff and the administrat
 
    ```yaml
    server:
-     port: 1221
+     port: 1222
      servlet:
        context-path: "/banking"
    spring:
