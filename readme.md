@@ -68,7 +68,7 @@ The software provides Separate security levels for the staff and the administrat
 
    ```yaml
    server:
-     port: 1221
+     port: 1222
      servlet:
        context-path: "/banking"
    spring:
