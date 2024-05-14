@@ -94,11 +94,13 @@
 } 
 @if (modalVisible1) {
     <app-modal [header]="'Download Account Statement'">
-        <form method="post" #generateForm="ngForm" (ngSubmit)="onGenerate(generateForm)">
+        <form method="post" #generateForm="ngForm">
             <label for="fromDate">From: </label><input type="date" placeholder="From Date" class="w-100" name="fromDate" required ngModel /><br>
             <label for="toDate">To: </label><input type="date" placeholder="To Date" class="w-100" name="toDate" required ngModel /><br>
+            <small class="note">* Please note that, your account statement PDF is password protected. <br> The password consists of the last 4 digits of your registered mobile number followed by the last 4 digits of your account number.</small>
             <div class="button-group">
-                <button type="submit">Download</button>
+                <button type="submit" (click)="onGenerate(generateForm)">Download Now</button>
+                <button type="submit" (click)="sendToMail(generateForm)">Send to mail</button>
                 <button type="button" (click)="modalVisible1 = !modalVisible1">Cancel</button>
             </div>
         </form>

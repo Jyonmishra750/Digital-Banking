@@ -135,7 +135,7 @@ label {
     cursor: pointer;
     text-transform: uppercase;
     font-size: large;
-    font-family: "Madimi One", sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-radius: 0.5rem;
     box-shadow: 5px 5px 5px var(--primary-shadow);
 }
@@ -171,11 +171,11 @@ app-modal input {
     border: 1px solid var(--secondary-sky);
     border-radius: 0.5rem;
     padding: 0.5rem 0.2rem;
-    font-family: "Madimi One", sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 app-modal .button-group {
-    padding-block: 0.5rem;
+    padding-block: 1rem;
     display: flex;
     justify-content: center;
     gap: 1rem;

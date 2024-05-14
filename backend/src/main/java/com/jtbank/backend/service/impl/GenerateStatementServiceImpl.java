@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
@@ -28,7 +29,7 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
 
     private final TransactionRepository transactionRepository;
     private final IAccountService service;
-    private static final String FILE = "C:\\Users\\HP\\Downloads\\MyBankStatement.pdf";
+    private static final String FILE = "C:\\Users\\HP\\Downloads\\";
 
     @Override
     public List<Transaction> generateStatements(long accountNumber, String startDate, String endDate) {
@@ -50,15 +51,30 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
                 })
                 .sorted(Comparator.comparing(Transaction::getTimestamp).reversed())
                 .toList();
-
+        String fileName = "MyStatement_"
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MMM-dd_HH-mm-ss"))
+                + ".pdf";
+        String filePath = FILE + fileName;
         var account = service.getAccount(accountNumber);
+
+        String mob = account.getContactNumber();
+        String acNumberStr = String.valueOf(accountNumber);
+        String lastFourDigitsMobile = mob.substring(mob.length() - 4);
+        String lastFourDigitsAccount = acNumberStr.substring(acNumberStr.length() - 4);
+
+        String pdfPassword = lastFourDigitsMobile + lastFourDigitsAccount;
 
         Rectangle statementSize = new Rectangle(PageSize.A4);
         Document document = new Document(statementSize);
         log.info("Setting the size of Document");
         try {
-            OutputStream outputStream = new FileOutputStream(FILE);
-            PdfWriter.getInstance(document, outputStream);
+            OutputStream outputStream = new FileOutputStream(filePath);
+            PdfWriter writer = PdfWriter.getInstance(document, outputStream);
+            writer.setEncryption(
+                    pdfPassword.getBytes(),
+                    pdfPassword.getBytes(),
+                    PdfWriter.ALLOW_PRINTING,
+                    PdfWriter.ENCRYPTION_AES_128);
             document.open();
         } catch (FileNotFoundException | DocumentException e) {
             throw new RuntimeException(e);
@@ -92,6 +108,10 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
         PdfPTable customerInfoTable = new PdfPTable(1);
         Font boldFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
 
+        Phrase datePhrase = new Phrase();
+        datePhrase.add(new Chunk("Statement Generated on: ", boldFont));
+        datePhrase.add(new Chunk(LocalDate.now().format(formatter1)));
+
         Phrase namePhrase = new Phrase();
         namePhrase.add(new Chunk("Name: ", boldFont));
         namePhrase.add(new Chunk(account.getAccountHolderName()));
@@ -103,24 +123,20 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
                 + ", "+account.getAddress().getCountry()
                 + ", "+account.getAddress().getZipcode()));
 
-        Phrase datePhrase = new Phrase();
-        datePhrase.add(new Chunk("Date: ", boldFont));
-        datePhrase.add(new Chunk(LocalDate.now().format(formatter1)));
-
         Phrase emailPhrase = new Phrase();
         emailPhrase.add(new Chunk("Email: ", boldFont));
         emailPhrase.add(new Chunk(account.getCredential().getAccountEmail()));
 
         Phrase accountNumberPhrase = new Phrase();
-        accountNumberPhrase.add(new Chunk("Account Number: ", boldFont));
+        accountNumberPhrase.add(new Chunk("Acc. Number: ", boldFont));
         accountNumberPhrase.add(new Chunk(String.valueOf(account.getAccountNumber())));
 
         Phrase accountTypePhrase = new Phrase();
-        accountTypePhrase.add(new Chunk("Account Type: ", boldFont));
+        accountTypePhrase.add(new Chunk("Acc. Type: ", boldFont));
         accountTypePhrase.add(new Chunk(String.valueOf(account.getAccountType())));
 
         Phrase accountStatusPhrase = new Phrase();
-        accountStatusPhrase.add(new Chunk("Account Status: ", boldFont));
+        accountStatusPhrase.add(new Chunk("Acc. Status: ", boldFont));
         accountStatusPhrase.add(new Chunk(String.valueOf(account.getStatus())));
 
         Phrase balancePhrase = new Phrase();
@@ -134,13 +150,13 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
         statementRangePhrase.add(new Chunk(" TO "));
         statementRangePhrase.add(new Chunk(formattedEndDate, boldFont));
 
+        PdfPCell statementDate = new PdfPCell(new Phrase(datePhrase));
+        statementDate.setPaddingTop(20);
+        statementDate.setBorder(0);
         PdfPCell name = new PdfPCell(namePhrase);
-        name.setPaddingTop(20);
         name.setBorder(0);
         PdfPCell address = new PdfPCell(new Phrase(addressPhrase));
         address.setBorder(0);
-        PdfPCell date = new PdfPCell(new Phrase(datePhrase));
-        date.setBorder(0);
         PdfPCell email = new PdfPCell(new Phrase(emailPhrase));
         email.setBorder(0);
         PdfPCell accountNo = new PdfPCell(new Phrase(accountNumberPhrase));
@@ -158,10 +174,10 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
         statement.setPaddingTop(10);
         statement.setPaddingBottom(10);
 
+        customerInfoTable.addCell(statementDate);
         customerInfoTable.addCell(name);
         customerInfoTable.addCell(email);
         customerInfoTable.addCell(address);
-        customerInfoTable.addCell(date);
         customerInfoTable.addCell(accountNo);
         customerInfoTable.addCell(type);
         customerInfoTable.addCell(status);

@@ -116,6 +116,10 @@ export class ProfileComponent implements OnInit {
    }
   }
 
+  sendToMail(form: NgForm) {
+    throw new Error('Method not implemented.');
+    }
+
   generateToast(heading: string, description: string) {
     this.toastHeading = heading;
     this.toastDescription = description;
