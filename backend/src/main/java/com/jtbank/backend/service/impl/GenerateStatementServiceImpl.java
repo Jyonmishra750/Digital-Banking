@@ -448,6 +448,10 @@ public class GenerateStatementServiceImpl implements IGenerateStatementService {
             throw new RuntimeException(e);
         }
 
-        mailService.sendStatementPdf(accountHolderName, accountHolderEmail, filePath);
+        if(accountHolderEmail != null){
+            mailService.sendStatementPdf(accountHolderName, accountHolderEmail, filePath);
+        } else {
+            throw new RuntimeException("Email Not Found");
+        }
     }
 }

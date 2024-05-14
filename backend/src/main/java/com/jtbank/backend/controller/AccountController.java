@@ -140,7 +140,7 @@ public class AccountController {
 
     @PostMapping("/sendPdfToEmail/{startDate}/date/{endDate}")
     @ResponseStatus(HttpStatus.OK)
-    public void sendStatementToEmail(@RequestAttribute long accountNumber,
+    public void sendStatementPdfToMail(@RequestAttribute long accountNumber,
                                      @PathVariable String startDate,
                                      @PathVariable String endDate) throws MessagingException, UnsupportedEncodingException {
         statementService.generateStatementAndSendAttachment(accountNumber, startDate, endDate);

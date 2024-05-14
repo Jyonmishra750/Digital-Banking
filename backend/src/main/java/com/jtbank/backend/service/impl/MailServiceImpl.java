@@ -242,7 +242,6 @@ public class MailServiceImpl implements IMailService {
                 "If you have any questions or need further assistance, please do not hesitate to contact our customer support team at \n" + sender +
                 "\n\n" +
                 "Thank you for choosing our services. We look forward to serving you.\n" +
-                "Best regards,\n" +
                 "Digital-Banking Team";
         helper.setText(body);
 
