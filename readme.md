@@ -97,7 +97,7 @@ With its comprehensive set of features, Digital-Banking offers a reliable and ef
    
    ```sh
    Frontend: http://localhost:4200
-   Backend (API): http://localhost:1221/banking
+   Backend (API): http://localhost:1222/banking
 
 ## Usage
 - Register a new account or log in with existing credentials.
