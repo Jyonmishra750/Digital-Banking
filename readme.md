@@ -2,9 +2,13 @@
 
 Secure Banking application with Spring Boot and Angular.
 
-This application provides a powerful tool for bank operations such as holding up accounting information in the database and also able to keep daily banking transactions. This application also helps add details of new customers such as account no; It also has features for deletion and modification of existing customers and provides fast data searching and calculating data with less time. This software helps reduce the clerical work of the staff since almost all of the work can be done by the software.
+Digital-Banking is a secure and user-friendly Internet banking platform that offers a range of essential features for managing your finances conveniently. With Digital-Banking, users can easily sign up and log in to their accounts, ensuring secure access to their banking services. The platform also provides robust OTP sending and validation processes to ensure account security during registration.
 
-The software provides Separate security levels for the staff and the administrator. This software holds a well-defined RDBMS database for storing data in the bank, which can handle and frequently use large amounts of data. The system can connect with the printers and scanners, which helps the user get full advantage of the software, such as giving up an annual report or another report in a printable format.
+Once logged in, users can manage their accounts effectively, viewing details such as balance and transaction history. Digital-Banking allows users to transfer funds between their accounts or to other users seamlessly. Users also receive email notifications for important account activities, such as fund transfers and updates, ensuring they stay informed at all times.
+
+One of the key features of Digital-Banking is its ability to generate account statements and download them in PDF format. Users can specify a valid date range to retrieve their account statements, providing them with a convenient way to track their financial activities.
+
+With its comprehensive set of features, Digital-Banking offers a reliable and efficient banking experience, empowering users to manage their finances with ease.
 
 ## Technology Used
 - JDK 17
@@ -18,9 +22,9 @@ The software provides Separate security levels for the staff and the administrat
 - **OTP Send and Validation**: Users will receive an OTP while registering and validate that OTP for successful registration.
 - **Account Management**: Users can view their account details, including balance and transaction history.
 - **Fund Transfers**: Users can transfer funds between their accounts or to other users.
-- **Transaction History**: Users can view their transaction history and filter transactions by date or type.
 - **Mail Notifications**: Users receive email notifications for important account activities, such as fund transfers and updates.
-- **Download Account Statement in PDF Format**: Users can download their account statements between a valid date range in PDF Format.
+- **Transaction History**: Users can view their transaction history of Deposit, Withdraw and Transfer activities.
+- **Generate statements and Download PDF**: Users can download their account statements in PDF format by specifying a valid date range.
 
 ## Technologies Used
 
@@ -93,10 +97,11 @@ The software provides Separate security levels for the staff and the administrat
    
    ```sh
    Frontend: http://localhost:4200
-   Backend (API): http://localhost:1221/banking
+   Backend (API): http://localhost:1222/banking
 
 ## Usage
 - Register a new account or log in with existing credentials.
 - Explore the dashboard to view account details and transaction history.
 - Use the fund transfer feature to transfer money between accounts.
 - Check your email for notifications on successful transactions and account updates.
+- Download account statements in PDF format.
