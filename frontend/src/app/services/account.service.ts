@@ -64,4 +64,8 @@ export class AccountService {
   generateStatement(startDate: string, endDate: string) {
     return this.http.post(BASE_URL + "/generateStatement/" + startDate + "/date/" + endDate, {});
   }
+
+  sendStatementAsAttachment(startDate: string, endDate: string) {
+    return this.http.post(BASE_URL + "/sendPdfToEmail/" + startDate + "/date/" + endDate, {});
+  }
 }

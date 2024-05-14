@@ -1,15 +1,20 @@
 package com.jtbank.backend.service.impl;
 
 import com.jtbank.backend.service.IMailService;
+import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -217,6 +222,35 @@ public class MailServiceImpl implements IMailService {
         message.setSubject(subject);
         message.setText(body);
         message.setTo(email);
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public void sendStatementPdf(String name, String email, String attachment) throws UnsupportedEncodingException, MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(new InternetAddress("digitalbanking.mcaproject@gmail.com", "Digital-Banking Team"));
+        helper.setTo(email);
+        helper.setSubject("Account Statement");
+
+        // Set the email body
+        String body = "Dear " + name + ",\n\n" +
+                "Please find attached the PDF file containing your account statement. " +
+                "The file is password protected for security reasons. " +
+                "Your password is the last 4 digits of your registered mobile number followed by the last 4 digits of your account number." +
+                "\n\n" +
+                "If you have any questions or need further assistance, please do not hesitate to contact our customer support team at \n" + sender +
+                "\n\n" +
+                "Thank you for choosing our services. We look forward to serving you.\n" +
+                "Best regards,\n" +
+                "Digital-Banking Team";
+        helper.setText(body);
+
+        // Add the attachment
+        FileSystemResource file = new FileSystemResource(new File(attachment));
+        helper.addAttachment("Account-Statement.pdf", file);
+
+        // Send the email
         javaMailSender.send(message);
     }
 }

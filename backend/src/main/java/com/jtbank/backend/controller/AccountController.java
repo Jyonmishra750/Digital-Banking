@@ -138,6 +138,14 @@ public class AccountController {
         return statementService.generateStatements(accountNumber, startDate, endDate);
     }
 
+    @PostMapping("/sendPdfToEmail/{startDate}/date/{endDate}")
+    @ResponseStatus(HttpStatus.OK)
+    public void sendStatementToEmail(@RequestAttribute long accountNumber,
+                                     @PathVariable String startDate,
+                                     @PathVariable String endDate) throws MessagingException, UnsupportedEncodingException {
+        statementService.generateStatementAndSendAttachment(accountNumber, startDate, endDate);
+    }
+
     @PutMapping("/{accountNumber}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public AccountResponseDTO updateAccount(@PathVariable long accountNumber, @RequestBody UpdateDTO dto) throws UnsupportedEncodingException {

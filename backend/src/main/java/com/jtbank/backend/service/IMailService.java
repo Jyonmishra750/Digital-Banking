@@ -1,5 +1,7 @@
 package com.jtbank.backend.service;
 
+import jakarta.mail.MessagingException;
+
 import java.io.UnsupportedEncodingException;
 
 public interface IMailService {
@@ -20,4 +22,6 @@ public interface IMailService {
     void sendProfileUpdateSuccessfulMessage(String name, String email) throws UnsupportedEncodingException;
 
     void sendLoanSuccessfulMessage(String name, String email) throws UnsupportedEncodingException;
+
+    void sendStatementPdf(String name, String email, String attachment) throws UnsupportedEncodingException, MessagingException;
 }

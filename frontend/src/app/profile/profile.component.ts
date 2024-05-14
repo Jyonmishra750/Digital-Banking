@@ -117,8 +117,27 @@ export class ProfileComponent implements OnInit {
   }
 
   sendToMail(form: NgForm) {
-    throw new Error('Method not implemented.');
-    }
+    if(form.valid){
+      const startDate = form.value.fromDate;
+      const endDate = form.value.toDate;
+      this.accountService.sendStatementAsAttachment(startDate, endDate).subscribe({
+        next: () => {
+          this.generateToast("Success", "Successfully sent account statement to your registered email")
+          form.reset;
+        },
+        error: err => {
+          console.log(err);
+          const error = err.error;
+          this.generateToast(error['title'], error['detail'])
+        },
+        complete: () => {
+          form.reset();
+          setTimeout(() => 2000);
+          this.modalVisible1 = false;
+        }
+      })
+   }
+  }
 
   generateToast(heading: string, description: string) {
     this.toastHeading = heading;
