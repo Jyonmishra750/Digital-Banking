@@ -6,7 +6,7 @@ Digital-Banking is a secure and user-friendly Internet banking platform that off
 
 Once logged in, users can manage their accounts effectively, viewing details such as balance and transaction history. Digital-Banking allows users to transfer funds between their accounts or to other users seamlessly. Users also receive email notifications for important account activities, such as fund transfers and updates, ensuring they stay informed at all times.
 
-One of the key features of Digital-Banking is its ability to generate account statements and download them in PDF format. Users can specify a valid date range to retrieve their account statements, providing them with a convenient way to track their financial activities.
+One of the key features of Digital-Banking is its ability to generate account statements and download them in PDF format. Users can specify a valid date range to retrieve their account statements, providing them with a convenient way to track their financial activities. For added convenience, users can choose to have the PDF statement directly in their registered email. The account statement PDF is securely encrypted. Only the users, with a unique password derived from the last 4 digits of their registered mobile number and the last 4 digits of their account number, can access it.
 
 With its comprehensive set of features, Digital-Banking offers a reliable and efficient banking experience, empowering users to manage their finances with ease.
 
@@ -24,7 +24,8 @@ With its comprehensive set of features, Digital-Banking offers a reliable and ef
 - **Fund Transfers**: Users can transfer funds between their accounts or to other users.
 - **Mail Notifications**: Users receive email notifications for important account activities, such as fund transfers and updates.
 - **Transaction History**: Users can view their transaction history of Deposit, Withdraw and Transfer activities.
-- **Generate statements and Download PDF**: Users can download their account statements in PDF format by specifying a valid date range.
+- **Generate statements and Download PDF**: Users can download their account statements in PDF format by specifying a valid date range. Additionally, users can opt to receive the PDF statement in their registered email.
+- **Securely Encrypted PDF**: The password to unlock the PDF is a combination of the last four digits of the user's registered mobile number followed by the last four digits of the user's account number, ensuring that only users have access to their statement.
 
 ## Technologies Used
 
@@ -32,7 +33,6 @@ With its comprehensive set of features, Digital-Banking offers a reliable and ef
 - **Backend**: Spring Boot, Java
 - **Database**: MySQL
 - **Security**: Spring Security, JWT Authentication
-- **Java MailSender**: Mail Sending Service
 - **ITextPdf**: PDF Download
 - **API Documentation**: Swagger
 
