@@ -18,9 +18,9 @@ The software provides Separate security levels for the staff and the administrat
 - **OTP Send and Validation**: Users will receive an OTP while registering and validate that OTP for successful registration.
 - **Account Management**: Users can view their account details, including balance and transaction history.
 - **Fund Transfers**: Users can transfer funds between their accounts or to other users.
-- **Transaction History**: Users can view their transaction history and filter transactions by date or type.
 - **Mail Notifications**: Users receive email notifications for important account activities, such as fund transfers and updates.
-- **Download Account Statement in PDF Format**: Users can download their account statements between a valid date range in PDF Format.
+- **Transaction History**: Users can view their transaction history of Deposit, Withdraw and Transfer activities.
+- **Generate statements and Download PDF**: Users can download their account statements in PDF format by specifying a valid date range.
 
 ## Technologies Used
 
@@ -100,3 +100,4 @@ The software provides Separate security levels for the staff and the administrat
 - Explore the dashboard to view account details and transaction history.
 - Use the fund transfer feature to transfer money between accounts.
 - Check your email for notifications on successful transactions and account updates.
+- Download account statements in PDF format.
