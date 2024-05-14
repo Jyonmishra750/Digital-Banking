@@ -32,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 profile-pictures
-resources
+/src/main/resources
